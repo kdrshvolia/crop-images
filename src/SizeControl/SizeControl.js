@@ -1,31 +1,17 @@
-import React, { Component } from 'react';
+import React, { useRef } from 'react';
 import './SizeControl.css';
 
-class SizeControl extends Component {
-  /*state = {
-    isDragging: false,
-  };*/
+const SizeControl = ({ coordinates, onStartDragging, style }) => {
+  const control = useRef(null);
 
-  constructor(props) {
-    super(props);
-    this.control = React.createRef();
-  }
-
-  handleMouseDown = e => {
+  const handleMouseDown = e => {
     e.stopPropagation();
-    this.props.onStartDragging(e, this.props.coordinates.x1, this.props.coordinates.x2, this.props.coordinates.y1, this.props.coordinates.y2);
+    onStartDragging(e, coordinates.x1, coordinates.x2, coordinates.y1, coordinates.y2);
   };
 
-  render() {
-    return (
-      <div
-        ref={this.control}
-        className="draggable-rect"
-        style={this.props.style}
-        onMouseDown={this.handleMouseDown}
-      />
-    );
-  }
-}
+  return (
+    <div ref={control} className="draggable-rect" style={style} onMouseDown={handleMouseDown} />
+  );
+};
 
 export default SizeControl;
